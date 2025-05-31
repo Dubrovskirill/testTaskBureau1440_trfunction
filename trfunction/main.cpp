@@ -16,35 +16,18 @@ int countTrailingZeros(const std::string& n) {
     return count;
 }
 
-// Функция для генерации следующего числа
-std::string nextNumber(const std::string& current) {
-    std::string result = current;
-    int i = result.length() - 1;
-    
-    while (i >= 0) {
-        if (result[i] < '9') {
-            result[i]++;
-            return result;
-        }
-        result[i] = '0';
-        i--;
-    }
-    
-    return "1" + std::string(result.length(), '0');
-}
-
 int main() {
     std::set<int> unique_powers;
-    std::string current = "2";  
     
-    // Перебираем числа до 10^30
-    while (current.length() <= 30) {
-        int k = countTrailingZeros(current);
+    //перебираем числа до 10^5 для проверки
+    for (int i = 2; i < 100000; i++) {
+        std::string num = std::to_string(i);
+        int k = countTrailingZeros(num);
         unique_powers.insert(k);
-        current = nextNumber(current);
     }
     
-    std::cout << "Total number of unique values: " << unique_powers.size() << std::endl;
+    
+    std::cout << "\nTotal number of unique values: " << unique_powers.size() << std::endl;
     
     return 0;
 }
